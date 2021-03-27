@@ -1,0 +1,24 @@
+html {
+    margin: 0;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+header {
+    text-align: center;
+    font-size: 3em;
+    font-family: "Caveat", cursive;
+    background-image: url();
+    object-fit: cover;
+    object-position: bottom;
+    height: 3em;
+    border-bottom: 3px solid beige;
+}
+
+main {
+    height: 100%;
+    width: 95vw;
+    margin: 0;
+}
