@@ -1,23 +1,28 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import Canvas from "./app";
+import Welcome from "./welcome";
+import App from "./app";
+
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
-import reducer from "./reducer";
-import io from "socket.io-client";
 
-const socket = io.connect();
-export const store = createStore(
+import reducer from "./reducer";
+
+const store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(reduxPromise))
 );
 
-function MixnMatch() {
-    return (
+let elem;
+if (location.pathname === "/welcome") {
+    elem = <Welcome />;
+} else {
+    elem = (
         <Provider store={store}>
+            <App />
         </Provider>
     );
 }
-ReactDOM.render(<MixnMatch />, document.querySelector("main"));
+
+ReactDOM.render(elem, document.querySelector("main"));

@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS resetPass;
-DROP TABLE IF EXISTS cards CASCADE;
+
 
 
 CREATE TABLE users (
@@ -20,6 +20,8 @@ CREATE TABLE resetPass  (
     code VARCHAR NOT NULL CHECK (code <> ''),
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
 
 
 

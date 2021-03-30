@@ -72,4 +72,36 @@ module.exports.getUser = (id) => {
     return db.query(q, params);
 };
 
+module.exports.recentUsers = () => {
+    const q = `
+    SELECT * FROM users
+    ORDER BY id DESC
+    LIMIT 4
+    `;
+    return db.query(q);
+};
+
+module.exports.searchResults = (val) => {
+    return db.query(
+        `SELECT * FROM users
+        WHERE firstname ILIKE $1 OR lastname ILIKE $1
+        LIMIT 5;`,
+        [val + "%"]
+    );
+};
+
 //_______________________________________________
+module.exports.getLager = () => {
+    return db.query("SELECT * FROM items");
+};
+
+module.exports.addTemp = (name, path, category) => {
+    let q =
+        "INSERT INTO items (name, path, category, temp) VALUES($1, $2, $3, $4) RETURNING *";
+    let params = [name, path, category, true];
+    return db.query(q, params);
+};
+
+module.exports.clearTemp = () => {
+    return db.query("DELETE FROM items WHERE temp=true");
+};
